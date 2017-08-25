@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div>
         <p>List all book titles here</p>
-        <BookList />
+        <BookList /> //need props here, get from database.
         <p>input text field to filter books</p>
         <p>form to add books to db.</p>
       </div>
