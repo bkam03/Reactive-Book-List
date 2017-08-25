@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
-import logo from '../../logo.svg';
 import './App.css';
 
 import BookList from '../../components/BookListAppTitle';
 
+const db = require('../../lib/books.db.js');
+
 class App extends Component {
+  componentDidMount() {
+    db.getBooksFromFakeXHR()
+      .then( ( value ) => {
+        console.log( 'then' );
+        this.setState({
+          bookList: db.getBooksFromFakeXHR()     check if this is becoming state properly
+        } );
+        console.log(this.state);
+      } )
+      .catch( ( err ) => {
+        console.log( 'db get err', err );
+      });
+  }
+
   render() {
     return (
       <div>
-        <p>List all book titles here</p>
+        <p>List all book titles here</p>  get booklist raw to appear here, then in booklist file.  then do individual book div rendering in that file.
         <BookList /> //need props here, get from database.
         <p>input text field to filter books</p>
         <p>form to add books to db.</p>
