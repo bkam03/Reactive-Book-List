@@ -11,9 +11,9 @@ class App extends Component {
       .then( ( value ) => {
         console.log( 'then' );
         this.setState({
-          bookList: db.getBooksFromFakeXHR()     check if this is becoming state properly
+          bookList: value
         } );
-        console.log(this.state);
+        console.log('state', this.state);
       } )
       .catch( ( err ) => {
         console.log( 'db get err', err );
