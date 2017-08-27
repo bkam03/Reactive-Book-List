@@ -64,10 +64,10 @@ class App extends Component {
     let newBook = {
       title: this.state.bookTitle,
       author: this.state.bookAuthor,
-      key: Math.floor( Math.random() * 1000 )
+      /*_id: Math.floor( Math.random() * 1000 )*/
     };
 
-    addBookToFakeXHR()
+    addBookToFakeXHR(newBook)
       .then((book) => {
         console.log(book);
       })
