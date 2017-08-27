@@ -15,6 +15,7 @@ class BookList extends Component {
               <Book
                 title={book.title}
                 author={book.author}
+                key={book._id}
               />
             )
         } )
