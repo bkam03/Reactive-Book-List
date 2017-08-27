@@ -13,28 +13,21 @@ class App extends Component {
     super();
     this.state= {
       books: [],
-      bookFilterText: '',
-      bookTitle: '',
-      bookAuthor: ''
+      bookFilterText: ''//,
+/*      bookTitle: '',
+      bookAuthor: ''*/
     };
   }
 
   componentWillMount() {
-    console.log( 'before render' );
-/*    this.setState({
-      books: [],
-      bookFilterText: '',
-      bookTitle: '',
-      bookAuthor: ''
-    });*/
     getBooksFromFakeXHR()
-      .then( books => {
+      .then( (books) => {
         console.log( books );
         this.setState({
           books: books
         });
       } )
-      .catch( err => {
+      .catch( (err) => {
         console.log( 'getbooks error', err );
       } );
   }
@@ -45,39 +38,24 @@ class App extends Component {
     });
   }
 
-  handleBookTitleChange(e){
-    console.log( 'titile');
-    this.setState({
-      bookTitle: e.target.value
-    })
-  }
 
-  handleBookAuthorChange(e){
-    console.log('author');
-    this.setState({
-      bookAuthor: e.target.value
-    })
-  }
+  addBookToDatabase(book){
 
-  handleBookSubmit(){
-    console.log('submit');
-    let newBook = {
-      title: this.state.bookTitle,
-      author: this.state.bookAuthor,
-      /*_id: Math.floor( Math.random() * 1000 )*/
-    };
-
-    addBookToFakeXHR(newBook)
-      .then((book) => {
-        console.log(book);
+    addBookToFakeXHR(book)
+      .then((bookList) => {
+        getBooksFromFakeXHR()
+          .then( books => {
+            this.setState({
+              books:  books
+            });
+          } )
+          .catch( err => {
+            console.log( err );
+          } );
       })
       .catch((err)=>{
         console.log(err);
       });
-
-    this.setState({
-      books: [ ...this.state.books, newBook ]
-    });
   }
 
   render() {
@@ -100,9 +78,7 @@ class App extends Component {
 
         <h3>Add a Book</h3>
         <NewBookForm
-          titleChange={this.handleBookTitleChange.bind(this)}
-          authorChange={this.handleBookAuthorChange.bind(this)}
-          submitBook={this.handleBookSubmit.bind(this)}
+          submitBook={this.addBookToDatabase.bind(this)}
         />
         <br />
         <br />
