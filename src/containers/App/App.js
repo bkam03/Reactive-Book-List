@@ -9,15 +9,24 @@ import NewBookForm from '../NewBookForm';
 
 
 class App extends Component {
-
-  componentWillMount() {
-    console.log( 'before render' );
-    this.setState({
+  constructor(){
+    super();
+    this.state= {
       books: [],
       bookFilterText: '',
       bookTitle: '',
       bookAuthor: ''
-    });
+    };
+  }
+
+  componentWillMount() {
+    console.log( 'before render' );
+/*    this.setState({
+      books: [],
+      bookFilterText: '',
+      bookTitle: '',
+      bookAuthor: ''
+    });*/
     getBooksFromFakeXHR()
       .then( books => {
         console.log( books );
@@ -58,6 +67,13 @@ class App extends Component {
       key: Math.floor( Math.random() * 1000 )
     };
 
+    addBookToFakeXHR()
+      .then((book) => {
+        console.log(book);
+      })
+      .catch((err)=>{
+        console.log(err);
+      });
 
     this.setState({
       books: [ ...this.state.books, newBook ]
