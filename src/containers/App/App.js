@@ -6,6 +6,9 @@ import BookList from '../BookList';
 
 import { getBooksFromFakeXHR, addBookToFakeXHR } from '../../lib/books.db.js'
 
+import BookFilterInput from '../../components/BookFilterInput';
+import NewBookForm from '../NewBookForm';
+
 
 class App extends Component {
 
@@ -38,7 +41,10 @@ class App extends Component {
         />
 
         <p>input text field to filter books</p>
+        <BookFilterInput />
+
         <p>form to add books to db.</p>
+
       </div>
     );
   }
