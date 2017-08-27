@@ -14,7 +14,9 @@ class App extends Component {
     console.log( 'before render' );
     this.setState({
       books: [],
-      bookFilterText: ''
+      bookFilterText: '',
+      bookTitle: '',
+      bookAuthor: ''
     });
     getBooksFromFakeXHR()
       .then( books => {
@@ -31,6 +33,34 @@ class App extends Component {
   handleFilterInputChange(e) {
     this.setState({
       bookFilterText: e.target.value
+    });
+  }
+
+  handleBookTitleChange(e){
+    console.log( 'titile');
+    this.setState({
+      bookTitle: e.target.value
+    })
+  }
+
+  handleBookAuthorChange(e){
+    console.log('author');
+    this.setState({
+      bookAuthor: e.target.value
+    })
+  }
+
+  handleBookSubmit(){
+    console.log('submit');
+    let newBook = {
+      title: this.state.bookTitle,
+      author: this.state.bookAuthor,
+      key: Math.floor( Math.random() * 1000 )
+    };
+
+
+    this.setState({
+      books: [ ...this.state.books, newBook ]
     });
   }
 
@@ -52,7 +82,11 @@ class App extends Component {
 
 
         <p>form to add books to db.</p>
-        <NewBookForm />
+        <NewBookForm
+          titleChange={this.handleBookTitleChange.bind(this)}
+          authorChange={this.handleBookAuthorChange.bind(this)}
+          submitBook={this.handleBookSubmit.bind(this)}
+        />
 
       </div>
     );
