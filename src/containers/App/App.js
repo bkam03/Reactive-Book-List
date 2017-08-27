@@ -1,30 +1,42 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import BookList from '../../components/BookListAppTitle';
+import BookListAppTitle from '../../components/BookListAppTitle';
+import BookList from '../BookList';
 
-const db = require('../../lib/books.db.js');
+import { getBooksFromFakeXHR, addBookToFakeXHR } from '../../lib/books.db.js'
+
 
 class App extends Component {
-  componentDidMount() {
-    db.getBooksFromFakeXHR()
-      .then( ( value ) => {
-        console.log( 'then' );
+
+  componentWillMount() {
+    console.log( 'before render' );
+    this.setState({
+      books: []
+    });
+    getBooksFromFakeXHR()
+      .then( books => {
+        console.log( books );
         this.setState({
-          bookList: value
-        } );
-        console.log('state', this.state);
+          books: books
+        });
       } )
-      .catch( ( err ) => {
-        console.log( 'db get err', err );
-      });
+      .catch( err => {
+        console.log( 'getbooks error', err );
+      } );
   }
 
   render() {
     return (
       <div>
-        <p>List all book titles here</p>  get booklist raw to appear here, then in booklist file.  then do individual book div rendering in that file.
-        <BookList /> //need props here, get from database.
+        <BookListAppTitle
+          title="BookList"
+        />
+
+        <BookList
+          books={this.state.books}
+        />
+
         <p>input text field to filter books</p>
         <p>form to add books to db.</p>
       </div>
