@@ -71,6 +71,7 @@ class App extends Component {
           title="BookList"
         />
 
+        <p>Filter by author or title</p>
         <BookFilterInput
           filterInputChange={this.handleFilterInputChange.bind(this)}
         />
@@ -81,12 +82,15 @@ class App extends Component {
         />
 
 
-        <p>form to add books to db.</p>
+        <h3>Add a Book</h3>
         <NewBookForm
           titleChange={this.handleBookTitleChange.bind(this)}
           authorChange={this.handleBookAuthorChange.bind(this)}
           submitBook={this.handleBookSubmit.bind(this)}
         />
+        <br />
+        <br />
+        <br />
 
       </div>
     );
