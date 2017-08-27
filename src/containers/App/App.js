@@ -15,7 +15,8 @@ class App extends Component {
   componentWillMount() {
     console.log( 'before render' );
     this.setState({
-      books: []
+      books: [],
+      bookFilterText: ''
     });
     getBooksFromFakeXHR()
       .then( books => {
@@ -29,6 +30,12 @@ class App extends Component {
       } );
   }
 
+  handleFilterInputChange(e) {
+    this.setState({
+      bookFilterText: e.target.value
+    });
+  }
+
   render() {
     return (
       <div>
@@ -36,12 +43,15 @@ class App extends Component {
           title="BookList"
         />
 
+        <BookFilterInput
+          filterInputChange={this.handleFilterInputChange.bind(this)}
+        />
+
         <BookList
+          filter={this.state.bookFilterText}
           books={this.state.books}
         />
 
-        <p>input text field to filter books</p>
-        <BookFilterInput />
 
         <p>form to add books to db.</p>
 
