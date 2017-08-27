@@ -1,9 +1,9 @@
 import React from 'react';
 
-const BookList = ( props ) => {
+const BookList = ( { title } ) => {
   return (
     <div className="BookListAppTitle">
-      this is the book list.
+      <h2>{title}</h2>
     </div>
   );
 }
